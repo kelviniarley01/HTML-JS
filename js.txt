@@ -1,0 +1,38 @@
+// Função para animar os cards quando aparecem na tela
+document.addEventListener('DOMContentLoaded', function() {
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    // Animação de entrada dos cards
+    const animateCards = () => {
+        projectCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 150 * index);
+        });
+    };
+    
+    // Inicializa com opacidade 0 para animação
+    projectCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    // Dispara animação após pequeno delay
+    setTimeout(animateCards, 300);
+    
+    // Adiciona evento de clique para cards (opcional)
+    projectCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Pode adicionar lógica adicional aqui se necessário
+            console.log('Projeto clicado:', this.querySelector('.card-title').textContent);
+        });
+    });
+    
+    // Adiciona tooltips para os ícones de tecnologia (opcional)
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
